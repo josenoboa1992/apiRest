@@ -17,7 +17,7 @@ router.post('/',
     check('rol').custom(validationRol),
         validarDatos
 ],postUsuario);
-router.put('/',putUsuario);
+router.put('/:id',putUsuario);
 router.patch('/',pathUsuario);
 router.delete('/',deleteUsuario);
 

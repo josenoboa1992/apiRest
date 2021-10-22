@@ -37,9 +37,10 @@ usuario
 
 const putUsuario=(req,res)=>{   
  
-
-    res.status(200).json({
-        msj:"hola mundo"
+    const id=req.params.id;
+    res.json({
+        msj:"hola mundo",
+        id
     })
 }
 

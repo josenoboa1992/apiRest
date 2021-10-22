@@ -12,7 +12,7 @@ if (!error.isEmpty()) {
 
 next();
 }
-
+    
 module.exports={
     validarDatos
 }
