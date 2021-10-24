@@ -1,5 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const { response } = require("express");
+const usuario = require("../models/usuario");
 const Usuario = require("../models/usuario");
 // const Usuario = require("../models/usuario")
 
@@ -31,16 +32,31 @@ const postUsuario=async(req,res=response)=>{
     
         
     res.json({
-usuario
+usuario 
     })
 }
 
-const putUsuario=(req,res)=>{   
+const putUsuario=async(req,res)=>{   
  
-    const id=req.params.id;
+    const {password,google,correo, ...resto}=req.body;
+
+    const {id}=req.params;
+
+
+    //Validar contra base de datos
+    if (password) {
+        
+        const salt=bcryptjs.genSaltSync();
+        resto.password=bcryptjs.hashSync(password,salt)
+    }
+
+    //validart por id
+    const  usuariodb= await usuario.findByIdAndUpdate(id,resto);
+
+
     res.json({
         msj:"hola mundo",
-        id
+      usuariodb
     })
 }
 
