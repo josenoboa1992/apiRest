@@ -38,7 +38,7 @@ usuario
 
 const putUsuario=async(req,res)=>{   
  
-    const {password,google,correo, ...resto}=req.body;
+    const {password,google,correo,_id, ...resto}=req.body;
 
     const {id}=req.params;
 

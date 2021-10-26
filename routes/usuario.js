@@ -2,7 +2,7 @@ const {Router}=require('express');
 const { check } = require('express-validator');
 const { validarDatos } = require('../middlewares/validatator');
 const { postUsuario, getUsuario, putUsuario, pathUsuario, deleteUsuario } = require('../controllers/usuario.controllers');
-const { correoExiste, validationRol } = require('../helpers/helpers');
+const { correoExiste, validationRol, validarId } = require('../helpers/helpers');
 
 
 const router=Router();
@@ -17,7 +17,12 @@ router.post('/',
     check('rol').custom(validationRol),
         validarDatos
 ],postUsuario);
-router.put('/:id',putUsuario);
+router.put('/:id',[
+    check('id','este mongo es fake').isMongoId(),
+    check('rol').custom(validationRol),
+    check('id').custom(validarId),
+    validarDatos
+],putUsuario);
 router.patch('/',pathUsuario);
 router.delete('/',deleteUsuario);
 

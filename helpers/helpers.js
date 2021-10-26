@@ -22,7 +22,19 @@ const correoExiste=async(correo='')=>{
     }
 
 }
+ 
+const validarId=async(id)=>{
+
+    const idexiste=await usuario.findById(id);
+
+    if (!idexiste) {
+        throw new Error(`El id: ${id} no existe en la base de datos`)
+        
+    }
+}
 
 module.exports={
-    correoExiste,validationRol
+    correoExiste,
+    validationRol,
+    validarId
 }
