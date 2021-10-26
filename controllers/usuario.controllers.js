@@ -4,10 +4,28 @@ const usuario = require("../models/usuario");
 const Usuario = require("../models/usuario");
 // const Usuario = require("../models/usuario")
 
-const getUsuario=(req,res)=>{
-    res.status(200).json({
-        msj:"hola mundo"
-    })
+const getUsuario=async(req,res)=>{
+
+    const {desde,limite}=req.query;
+
+// const usuarioget=await Usuario.find()
+// .skip(Number(desde))
+// .limit(Number(limite))
+
+//     const totalUsuario=await Usuario.countDocuments();
+
+
+    const [usuarioget,totalUsuario]=await Promise.all([
+
+        Usuario.find()
+        .skip(Number(desde))
+        .limit(Number(limite)),
+        Usuario.countDocuments()
+    ])
+
+
+
+    res.status(200).json({totalUsuario,usuarioget})
 };
 
 const postUsuario=async(req,res=response)=>{
