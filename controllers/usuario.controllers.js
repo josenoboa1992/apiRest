@@ -6,7 +6,7 @@ const Usuario = require("../models/usuario");
 
 const getUsuario=async(req,res)=>{
 
-    const {desde,limite}=req.query;
+    const {desde=1,limite=100}=req.query;
 
 // const usuarioget=await Usuario.find()
 // .skip(Number(desde))
@@ -17,10 +17,10 @@ const getUsuario=async(req,res)=>{
 
     const [usuarioget,totalUsuario]=await Promise.all([
 
-        Usuario.find()
+        Usuario.find({estado:true})
         .skip(Number(desde))
         .limit(Number(limite)),
-        Usuario.countDocuments()
+        Usuario.countDocuments({estado:true})
     ])
 
 
@@ -84,9 +84,15 @@ const pathUsuario=(req,res)=>{
     })
 }
 
-const deleteUsuario=(req,res)=>{
+const deleteUsuario=async(req,res)=>{
+
+    const {id}=req.params;
+
+    const usuarioD=await Usuario.findByIdAndUpdate(id,{estado:false})
+
     res.status(200).json({
-        msj:"hola mundo"
+    usuarioD
+       
     })
 }
 

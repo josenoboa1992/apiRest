@@ -24,7 +24,7 @@ router.put('/:id',[
     validarDatos
 ],putUsuario);
 router.patch('/',pathUsuario);
-router.delete('/',deleteUsuario);
+router.delete('/:id',deleteUsuario);
 
 
 

@@ -20,6 +20,7 @@ class Servidor{
     middleware(){
        
         this.app.use(cors())
+        this.app.use(express.static('public'))
 
         this.app.use(express.json());
     
