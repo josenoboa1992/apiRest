@@ -5,7 +5,13 @@ const dataconection=async()=>{
 
     try {
         
-        await mongoose.connect(process.env.MONGOOSE_DB);
+        await mongoose.connect(process.env.MONGOOSE_DB,{
+            useNewUrlParser: true,
+            // useUnifiedTopology: true,
+            // useCreateIndex: true,
+            // useFindAndModify: false
+        });
+
         console.log('base de datos online');
     } catch (error) {
 
