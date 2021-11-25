@@ -8,8 +8,15 @@ class Servidor{
     constructor(){
         this.app=express();
         this.port=process.env.PORT;
-        this.middleware();
+        this.middleware(); 
+        
+        //rutas
+        this.usuarios='/api/usuario';
+        this.login='/api/auth';
+       
         this.routes();
+        
+        
 
         this.basededatos();
         
@@ -33,7 +40,8 @@ class Servidor{
 
     routes(){
 
-        this.app.use('/api/usuario',require('../routes/usuario'))
+        this.app.use(this.usuarios,require('../routes/usuario'))
+        this.app.use(this.login,require('../routes/login'))
     }
 
     listen(){
